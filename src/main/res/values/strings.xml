@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Talalarmo</string>
+
+    <string name="settings_activity_title">Settings</string>
+
+    <string name="tv_start_alarm_text">TAP HERE\nTO SET ALARM</string>
+    <string name="tv_stop_alarm_text">TAP HERE\nTO STOP</string>
+    <string name="tv_time_left_text">Alarm is set for %s from now</string>
+    <string name="time_format">%1$02dh\u00A0%2$02dm</string>
+
+    <!-- Options menu -->
+    <string name="om_settings_title">Settings</string>
+    <string name="om_feedback_title">Leave feedback</string>
+
+    <!-- Notifications and dialogs -->
+    <string name="dlg_email_chooser_title">Send email</string>
+    <string name="feedback_email_subject">Feedback about Talalarmo</string>
+
+    <!-- Preferences -->
+    <string name="settings_vibration_option">Vibrate</string>
+    <string name="settings_vibration_option_summary">Vibrate when alarm goes off</string>
+    <string name="settings_ringtone_option">Alarm ringtone</string>
+    <string name="settings_ringtone_option_summary">Select a ringtone for an alarm</string>
+    <string name="settings_snap_option">Snap to 5 min</string>
+    <string name="settings_snap_option_summary">Snap minutes clock to 5 minutes intervals</string>
+    <string name="settings_volume_increase_option">Fade-in sound</string>
+    <string name="settings_volume_increase_option_summary">Start alarm at a low volume level and increase it gradually</string>
+    <string name="settings_theme_option">Theme</string>
+    <string name="settings_theme_option_summary">Select the theme</string>
+
+    <string-array name="settings_themes">
+        <item>Holo Light</item>
+        <item>Holo Dark</item>
+    </string-array>
+    <string-array name="settings_themes_values">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+</resources>
