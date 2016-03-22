@@ -107,6 +107,8 @@ public interface State {
                 } else {
                     return ImmutableNavigation.copyOf(navigation).withExit(true);
                 }
+            } else if (action.type == Actions.Navigation.EXIT) {
+                return ImmutableNavigation.copyOf(navigation).withExit(false);
             }
             return navigation;
         }

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
 import trikita.anvil.Anvil;
@@ -21,8 +22,11 @@ public class MainActivity extends Activity {
     @Override
     public void onCreate(Bundle b) {
         super.onCreate(b);
-//        setTheme(android.R.style.Theme_Holo_Light_NoActionBar);
-        setTheme(android.R.style.Theme_Material_Light_NoActionBar);
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            setTheme(android.R.style.Theme_Holo_Light_NoActionBar);
+        } else {
+            setTheme(android.R.style.Theme_Material_Light_NoActionBar);
+        }
         setContentView(new RenderableView(this) {
             public void view() {
                 if (App.getState().navigation().settingsScreen()) {
@@ -38,6 +42,7 @@ public class MainActivity extends Activity {
     public void onBackPressed() {
         App.dispatch(new Action<>(Actions.Navigation.BACK));
         if (App.getState().navigation().exit()) {
+            App.dispatch(new Action<>(Actions.Navigation.EXIT));
             super.onBackPressed();
         }
     }
