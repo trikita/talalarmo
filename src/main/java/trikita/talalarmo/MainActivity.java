@@ -21,6 +21,8 @@ public class MainActivity extends Activity {
     @Override
     public void onCreate(Bundle b) {
         super.onCreate(b);
+//        setTheme(android.R.style.Theme_Holo_Light_NoActionBar);
+        setTheme(android.R.style.Theme_Material_Light_NoActionBar);
         setContentView(new RenderableView(this) {
             public void view() {
                 if (App.getState().navigation().settingsScreen()) {

@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.PopupWindow;
 
 import trikita.anvil.Anvil;
@@ -221,59 +222,21 @@ public class AlarmLayout {
     }
 
     private static void showSettingsMenu(View v) {
-        final PopupWindow popupWindow = new PopupWindow(new RenderableView(v.getContext()) {
-            public void view() {
-                linearLayout(() -> {
-                    size(dip(200), FILL);
-                    minHeight(dip(110));
-                    margin(dip(6));
-                    orientation(LinearLayout.VERTICAL);
-                    backgroundResource(Theme.LIGHT.popupMenuBackground);
-
-                    button(() -> {
-                        size(FILL, 0);
-                        weight(0.5f);
-                        typeface("fonts/Roboto-Light.ttf");
-                        text(R.string.om_settings_title);
-                        textColor(Theme.LIGHT.primaryTextColor);
-                        textSize(dip(18));
-                        gravity(LEFT | CENTER_VERTICAL);
-                        padding(dip(25), 0, dip(20), 0);
-                        backgroundResource(Theme.LIGHT.popupMenuItemSelector);
-                        //TODO: dismiss() on click
-                        onClick(v -> App.dispatch(new Action<>(Actions.Navigation.SETTINGS)));
-                    });
-                    v(View.class, () -> {
-                        size(FILL, 1);
-                        backgroundColor(Theme.LIGHT.dividerColor);
-                        margin(dip(2), 0);
-                    });
-                    button(() -> {
-                        size(FILL, 0);
-                        weight(0.5f);
-                        typeface("fonts/Roboto-Light.ttf");
-                        text(R.string.om_feedback_title);
-                        textColor(Theme.LIGHT.primaryTextColor);
-                        textSize(dip(18));
-                        gravity(LEFT | CENTER_VERTICAL);
-                        padding(dip(25), 0, dip(20), 0);
-                        backgroundResource(Theme.LIGHT.popupMenuItemSelector);
-                        //TODO: dismiss() on click
-                        onClick(v -> {
-                            Context c = getContext();
-                            Intent intent = new Intent(Intent.ACTION_SENDTO,
-                                    Uri.fromParts("mailto", "adm.trikita@gmail.com", null));
-                            intent.putExtra(Intent.EXTRA_SUBJECT, c.getString(R.string.feedback_email_subject));
-                            v.getContext().startActivity(Intent.createChooser(intent, c.getString(R.string.dlg_email_chooser_title)));
-                        });
-                    });
-                });
+        PopupMenu menu = new PopupMenu(v.getContext(), v);
+        menu.getMenuInflater().inflate(R.menu.overflow_popup, menu.getMenu());
+        menu.setOnMenuItemClickListener(item -> {
+            if (item.getItemId() == R.id.menu_settings) {
+                App.dispatch(new Action<>(Actions.Navigation.SETTINGS));
+            } else if (item.getItemId() == R.id.menu_feedback) {
+                Context c = v.getContext();
+                Intent intent = new Intent(Intent.ACTION_SENDTO,
+                        Uri.fromParts("mailto", "adm.trikita@gmail.com", null));
+                intent.putExtra(Intent.EXTRA_SUBJECT, c.getString(R.string.feedback_email_subject));
+                v.getContext().startActivity(Intent.createChooser(intent, c.getString(R.string.dlg_email_chooser_title)));
             }
-        }, FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
-        popupWindow.setOutsideTouchable(true);
-        popupWindow.setBackgroundDrawable(new BitmapDrawable());
-        DisplayMetrics metrics = v.getContext().getResources().getDisplayMetrics();
-        // height of the popup window is ~120dp
-        popupWindow.showAsDropDown(v, 0, (int) (-120 * metrics.density));
+            System.out.println("" + item.getItemId());
+            return true;
+        });
+        menu.show();
     }
 }
