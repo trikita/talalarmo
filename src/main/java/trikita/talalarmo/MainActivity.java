@@ -26,6 +26,10 @@ public class MainActivity extends Activity {
         });
     }
 
+    public void onResume() {
+        super.onResume();
+        updateTheme();
+        Anvil.render();
     }
 
     public void openSettings() {
