@@ -20,6 +20,7 @@ public interface State {
         boolean snap();
         boolean ramping();
         String ringtone();
+        int theme();
     }
 
     @Value.Immutable
@@ -70,6 +71,7 @@ public interface State {
                     .navigation(ImmutableNavigation.builder()
                             .settingsScreen(false)
                             .exit(false)
+                            .theme(0)
                             .build())
                     .build();
         }
@@ -91,8 +93,12 @@ public interface State {
                         return ImmutableSettings.copyOf(settings).withRamping((Boolean) action.value);
                     case SET_VIBRATE:
                         return ImmutableSettings.copyOf(settings).withVibrate((Boolean) action.value);
+                    case SET_SNAP:
+                        return ImmutableSettings.copyOf(settings).withSnap((Boolean) action.value);
                     case SET_RINGTONE:
                         return ImmutableSettings.copyOf(settings).withRingtone((String) action.value);
+                    case SET_THEME:
+                        return ImmutableSettings.copyOf(settings).withTheme((Integer) action.value);
                 }
             }
             return settings;
