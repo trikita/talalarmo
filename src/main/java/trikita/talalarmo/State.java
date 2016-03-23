@@ -43,15 +43,8 @@ public interface State {
         }
     }
 
-    @Value.Immutable
-    interface Navigation {
-        boolean settingsScreen();
-        boolean exit();
-    }
-
     Settings settings();
     Alarm alarm();
-    Navigation navigation();
 
     class Default {
         public static State build() {
@@ -67,10 +60,6 @@ public interface State {
                             .ramping(true)
                             .snap(true)
                             .vibrate(false)
-                            .build())
-                    .navigation(ImmutableNavigation.builder()
-                            .settingsScreen(false)
-                            .exit(false)
                             .theme(0)
                             .build())
                     .build();
@@ -82,7 +71,6 @@ public interface State {
             return ImmutableState.builder().from(currentState)
                     .alarm(reduceAlarm(action, currentState.alarm()))
                     .settings(reduceSettings(action, currentState.settings()))
-                    .navigation(reduceNavigation(action, currentState.navigation()))
                     .build();
         }
         State.Settings reduceSettings(Action action, State.Settings settings) {
@@ -102,21 +90,6 @@ public interface State {
                 }
             }
             return settings;
-        }
-
-        State.Navigation reduceNavigation(Action action, State.Navigation navigation) {
-            if (action.type == Actions.Navigation.SETTINGS) {
-                return ImmutableNavigation.copyOf(navigation).withSettingsScreen(true);
-            } else if (action.type == Actions.Navigation.BACK) {
-                if (navigation.settingsScreen()) {
-                    return ImmutableNavigation.copyOf(navigation).withSettingsScreen(false);
-                } else {
-                    return ImmutableNavigation.copyOf(navigation).withExit(true);
-                }
-            } else if (action.type == Actions.Navigation.EXIT) {
-                return ImmutableNavigation.copyOf(navigation).withExit(false);
-            }
-            return navigation;
         }
 
         State.Alarm reduceAlarm(Action action, State.Alarm alarm) {
