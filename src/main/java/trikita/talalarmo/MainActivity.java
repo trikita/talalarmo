@@ -26,12 +26,6 @@ public class MainActivity extends Activity {
         });
     }
 
-    public void onBackPressed() {
-        App.dispatch(new Action<>(Actions.Navigation.BACK));
-        if (App.getState().navigation().exit()) {
-            App.dispatch(new Action<>(Actions.Navigation.EXIT));
-            super.onBackPressed();
-        }
     }
 
     public void openSettings() {
