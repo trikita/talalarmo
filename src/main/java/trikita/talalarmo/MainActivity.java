@@ -8,7 +8,6 @@ import android.os.Bundle;
 import trikita.anvil.Anvil;
 import trikita.anvil.RenderableView;
 import trikita.talalarmo.ui.AlarmLayout;
-import trikita.talalarmo.ui.SettingsLayout;
 
 public class MainActivity extends Activity {
 
@@ -22,11 +21,7 @@ public class MainActivity extends Activity {
         }
         setContentView(new RenderableView(this) {
             public void view() {
-                if (App.getState().navigation().settingsScreen()) {
-                    SettingsLayout.view();
-                } else {
-                    AlarmLayout.view();
-                }
+                AlarmLayout.view();
             }
         });
     }
