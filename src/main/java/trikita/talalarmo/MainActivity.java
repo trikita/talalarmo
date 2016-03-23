@@ -53,6 +53,9 @@ public class MainActivity extends Activity {
         if (requestCode == RINGTONE_REQUEST_CODE && data != null) {
             Uri uri = data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
             App.dispatch(new Action<>(Actions.Settings.SET_RINGTONE, uri.toString()));
+    public void openSettings() {
+        startActivity(new Intent(this, SettingsActivity.class));
+    }
         }
     }
 }

@@ -17,6 +17,7 @@ import trikita.anvil.RenderableView;
 import trikita.jedux.Action;
 import trikita.talalarmo.Actions;
 import trikita.talalarmo.App;
+import trikita.talalarmo.MainActivity;
 import trikita.talalarmo.R;
 
 import static trikita.anvil.DSL.*;
@@ -226,7 +227,7 @@ public class AlarmLayout {
         menu.getMenuInflater().inflate(R.menu.overflow_popup, menu.getMenu());
         menu.setOnMenuItemClickListener(item -> {
             if (item.getItemId() == R.id.menu_settings) {
-                App.dispatch(new Action<>(Actions.Navigation.SETTINGS));
+                ((MainActivity) v.getContext()).openSettings();
             } else if (item.getItemId() == R.id.menu_feedback) {
                 Context c = v.getContext();
                 Intent intent = new Intent(Intent.ACTION_SENDTO,
