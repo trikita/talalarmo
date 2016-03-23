@@ -23,7 +23,7 @@ import static trikita.anvil.DSL.*;
 
 public class AlarmLayout {
     public static void view() {
-        backgroundColor(Theme.LIGHT.backgroundColor);
+        backgroundColor(Theme.get(App.getState().settings().theme()).backgroundColor);
         linearLayout(() -> {
             orientation(LinearLayout.VERTICAL);
             header();
@@ -45,7 +45,7 @@ public class AlarmLayout {
             size(FILL, WRAP);
             gravity(CENTER_VERTICAL);
             Theme.materialIcon(() -> {
-                textColor(Theme.LIGHT.primaryTextColor);
+                textColor(Theme.get(App.getState().settings().theme()).primaryTextColor);
                 textSize(dip(32));
                 padding(dip(15));
                 text("\ue855"); // "alarm" icon
@@ -55,7 +55,7 @@ public class AlarmLayout {
                 weight(1f);
                 typeface("fonts/Roboto-Light.ttf");
                 textSize(dip(20));
-                textColor(Theme.LIGHT.primaryTextColor);
+                textColor(Theme.get(App.getState().settings().theme()).primaryTextColor);
                 text(R.string.app_name);
             });
         });
@@ -68,7 +68,7 @@ public class AlarmLayout {
             gravity(LEFT | CENTER_VERTICAL);
             typeface("fonts/Roboto-Light.ttf");
             textSize(dip(32));
-            textColor(Theme.LIGHT.secondaryTextColor);
+            textColor(Theme.get(App.getState().settings().theme()).secondaryTextColor);
             text(R.string.tv_start_alarm_text);
             onClick(v -> App.dispatch(new Action<>(Actions.Alarm.ON)));
         });
@@ -115,7 +115,7 @@ public class AlarmLayout {
                     layoutGravity(CENTER);
                     typeface("fonts/Roboto-Light.ttf");
                     textSize(hourCircleSize * 0.3f);
-                    textColor(Theme.LIGHT.secondaryTextColor);
+                    textColor(Theme.get(App.getState().settings().theme()).secondaryTextColor);
                 });
             });
 
@@ -141,7 +141,7 @@ public class AlarmLayout {
                     layoutGravity(CENTER);
                     typeface("fonts/Roboto-Light.ttf");
                     textSize(minuteCircleSize * 0.3f);
-                    textColor(Theme.LIGHT.secondaryTextColor);
+                    textColor(Theme.get(App.getState().settings().theme()).secondaryTextColor);
                 });
             });
 
@@ -160,12 +160,12 @@ public class AlarmLayout {
     private static void bottomBar() {
         linearLayout(() -> {
             size(FILL, dip(62));
-            backgroundColor(Theme.LIGHT.backgroundTranscluentColor);
+            backgroundColor(Theme.get(App.getState().settings().theme()).backgroundTranscluentColor);
 
             Theme.materialIcon(() -> {
                 text("\ue857"); // ALARM OFF
                 textSize(dip(32));
-                textColor(Theme.LIGHT.secondaryTextColor);
+                textColor(Theme.get(App.getState().settings().theme()).secondaryTextColor);
                 padding(dip(15));
                 visibility(App.getState().alarm().on());
                 onClick(v -> App.dispatch(new Action<>(Actions.Alarm.OFF)));
@@ -177,7 +177,7 @@ public class AlarmLayout {
                 margin(dip(10), 0);
                 typeface("fonts/Roboto-Light.ttf");
                 textSize(dip(20));
-                textColor(Theme.LIGHT.primaryTextColor);
+                textColor(Theme.get(App.getState().settings().theme()).primaryTextColor);
                 gravity(CENTER | CENTER_VERTICAL);
                 if (App.getState().alarm().on()) {
                     long t = App.getState().alarm().nextAlarm().getTimeInMillis() - System.currentTimeMillis() - 1;
@@ -214,7 +214,7 @@ public class AlarmLayout {
             Theme.materialIcon(() -> {
                 text("\ue5d4"); // "more vert"
                 textSize(dip(32));
-                textColor(Theme.LIGHT.secondaryTextColor);
+                textColor(Theme.get(App.getState().settings().theme()).secondaryTextColor);
                 padding(dip(15));
                 onClick(v -> showSettingsMenu(v));
             });

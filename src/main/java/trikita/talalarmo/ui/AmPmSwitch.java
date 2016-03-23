@@ -7,6 +7,8 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.widget.ToggleButton;
 
+import trikita.talalarmo.App;
+
 public class AmPmSwitch extends ToggleButton {
     private final static String tag = "TimeSwitch";
 
@@ -18,15 +20,10 @@ public class AmPmSwitch extends ToggleButton {
 
     private Paint mPaint;
 
-    private int mColorOn;
-    private int mColorOff;
-
     public AmPmSwitch(Context c) {
         super(c);
         Typeface t = Typeface.createFromAsset(getContext().getAssets(),
                 "fonts/Roboto-Light.ttf");
-        mColorOff = Theme.LIGHT.primaryColor;
-        mColorOn = Theme.LIGHT.accentColor;
 
         mPaint = new Paint();
         mPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
@@ -38,6 +35,9 @@ public class AmPmSwitch extends ToggleButton {
 
     @Override
     public void onDraw(Canvas c) {
+        int colorOff = Theme.get(App.getState().settings().theme()).primaryColor;
+        int colorOn  = Theme.get(App.getState().settings().theme()).accentColor;
+
         mPaint.setTextSize((int) (getHeight() * TEXT_SIZE_COEF));
         Rect amRect = new Rect();
         mPaint.getTextBounds("AM", 0, "AM".length(), amRect);
@@ -53,11 +53,11 @@ public class AmPmSwitch extends ToggleButton {
         float startPosX = 0;
         float startPosY = (getHeight() + amRect.height()) / 2.0f;
 
-        mPaint.setColor(mColorOff);
+        mPaint.setColor(colorOff);
         c.drawText("AM", startPosX, startPosY, mPaint);
         c.drawText("PM", startPosX + amW + drawableWidth, startPosY, mPaint);
 
-        mPaint.setColor(mColorOn);
+        mPaint.setColor(colorOn);
         if (isChecked()) {
             c.drawCircle(startPosX + amW + padding + r, getHeight()/2.0f, r, mPaint);
         } else {

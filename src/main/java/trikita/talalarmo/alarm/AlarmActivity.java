@@ -31,9 +31,9 @@ public class AlarmActivity extends Activity {
                 Theme.materialIcon(() -> {
                     size(FILL, FILL);
                     text("\ue857"); // "alarm off"
-                    textColor(Theme.LIGHT.secondaryTextColor);
+                    textColor(Theme.get(App.getState().settings().theme()).secondaryTextColor);
                     textSize(dip(128));
-                    backgroundColor(Theme.LIGHT.backgroundColor);
+                    backgroundColor(Theme.get(App.getState().settings().theme()).backgroundColor);
                     onClick(v -> {
                         App.dispatch(new Action<>(Actions.Alarm.DISMISS));
                         finish();

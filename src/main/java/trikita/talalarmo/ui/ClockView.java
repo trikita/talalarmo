@@ -13,14 +13,13 @@ import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.widget.SeekBar;
 
+import trikita.talalarmo.App;
+
 public class ClockView extends SeekBar {
 	private final static String tag = "ClockView";
 
 	private final static float RING_WIDTH_COEF = 0.09f;
 	private final static float PADDING_COEF = RING_WIDTH_COEF * 2;
-
-	private int mPrimaryColor;
-	private int mAccentColor;
 
 	private Paint mPaint = new Paint();
 	private OnSeekBarChangeListener mListener;
@@ -28,8 +27,6 @@ public class ClockView extends SeekBar {
 	public ClockView(Context c) {
 		super(c);
 		mPaint.setAntiAlias(true);
-		mPrimaryColor = Theme.LIGHT.primaryColor;
-		mAccentColor = Theme.LIGHT.accentColor;
 	}
 
 	@Override
@@ -39,6 +36,9 @@ public class ClockView extends SeekBar {
 
 	@Override
 	public void onDraw(Canvas c) {
+		int primaryColor = Theme.get(App.getState().settings().theme()).primaryColor;
+		int accentColor = Theme.get(App.getState().settings().theme()).accentColor;
+
 		int w = getWidth();
 
 		DisplayMetrics dm = getResources().getDisplayMetrics();
@@ -50,7 +50,7 @@ public class ClockView extends SeekBar {
 		// draw ring
 		mPaint.setStyle(Paint.Style.STROKE);
 		mPaint.setStrokeWidth(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, dm));
-		mPaint.setColor(mPrimaryColor);
+		mPaint.setColor(primaryColor);
 
 		RectF rectf = new RectF(center - radius, center - radius, center + radius, center + radius);
 		float a = (float) (getProgress() * 360 / getMax());
@@ -58,7 +58,7 @@ public class ClockView extends SeekBar {
 			a = 360;
 		}
 		c.drawArc(rectf, a - 90, 360 - a, false, mPaint);
-		mPaint.setColor(mAccentColor);
+		mPaint.setColor(accentColor);
 		c.drawArc(rectf, -90, a, false, mPaint);
 	}
 

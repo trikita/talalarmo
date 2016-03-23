@@ -49,6 +49,14 @@ public enum Theme {
         this.popupMenuItemSelector = popupMenuItemSelector;
     }
 
+    public static Theme get(int index) {
+        if (index == 0) {
+            return LIGHT;
+        } else {
+            return DARK;
+        }
+    }
+
     public static void materialIcon(Anvil.Renderable r) {
         textView(() -> {
             size(WRAP, WRAP);
