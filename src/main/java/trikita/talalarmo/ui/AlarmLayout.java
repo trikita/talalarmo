@@ -131,6 +131,10 @@ public class AlarmLayout {
                     max(60);
                     onSeekBarChange((v, progress, fromUser) -> {
                         if (fromUser) {
+                            if (App.getState().settings().snap()) {
+                                progress = progress / 5;
+                                progress = progress * 5;
+                            }
                             App.dispatch(new Action<>(Actions.Alarm.SET_MINUTE, progress));
                         }
                     });

@@ -71,7 +71,7 @@ public class ClockView extends SeekBar {
 				double angle = pointToAngle(p);
 				mListener.onProgressChanged(this, (int) (angle / Math.PI / 2 * getMax()), true);
 				return true;
-            }
+			}
 		} else if (event.getAction() == MotionEvent.ACTION_UP) {
 			mListener.onProgressChanged(this, (int) (pointToAngle(p)/ Math.PI / 2 * getMax()), true);
 			return true;
