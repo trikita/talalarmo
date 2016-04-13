@@ -4,11 +4,8 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
-import android.graphics.Rect;
 import android.graphics.RectF;
-import android.graphics.Typeface;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.widget.SeekBar;
@@ -16,7 +13,6 @@ import android.widget.SeekBar;
 import trikita.talalarmo.App;
 
 public class ClockView extends SeekBar {
-	private final static String tag = "ClockView";
 
 	private final static float RING_WIDTH_COEF = 0.09f;
 	private final static float PADDING_COEF = RING_WIDTH_COEF * 2;

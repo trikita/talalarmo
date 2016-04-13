@@ -57,7 +57,7 @@ public class MainActivity extends Activity {
             }
         }
 
-        // fill statusbar with a theme dark color on post-Lollipop devices
+        // fill status bar with a theme dark color on post-Lollipop devices
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);

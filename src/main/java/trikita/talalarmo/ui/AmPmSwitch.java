@@ -10,13 +10,11 @@ import android.widget.ToggleButton;
 import trikita.talalarmo.App;
 
 public class AmPmSwitch extends ToggleButton {
-    private final static String tag = "TimeSwitch";
 
     private final static float TEXT_SIZE_COEF = 0.3f;	// from view height
-    private float TEXT_WIDTH_COEF = 0.3f;
-    private float DRAWABLE_PADDING_COEF = 0.1f;
-    private float DRAWABLE_WIDTH_COEF = 0.8f;
-    private float CIRCLE_RADIUS_COEF = 0.2f;
+    private final static float DRAWABLE_PADDING_COEF = 0.1f;
+    private final static float DRAWABLE_WIDTH_COEF = 0.8f;
+    private final static float CIRCLE_RADIUS_COEF = 0.2f;
 
     private Paint mPaint;
 

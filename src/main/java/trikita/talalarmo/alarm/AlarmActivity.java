@@ -28,7 +28,7 @@ public class AlarmActivity extends Activity {
         mWakeLock.acquire();
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
 
-        // fill statusbar with a theme dark color on post-Lollipop devices
+        // fill status bar with a theme dark color on post-Lollipop devices
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
