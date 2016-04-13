@@ -181,7 +181,7 @@ public class AlarmLayout {
                 weight(1f);
                 margin(dip(10), 0);
                 typeface("fonts/Roboto-Light.ttf");
-                textSize(dip(20));
+                textSize(dip(16));
                 textColor(Theme.get(App.getState().settings().theme()).primaryTextColor);
                 gravity(CENTER | CENTER_VERTICAL);
                 if (App.getState().alarm().on()) {
