@@ -4,4 +4,6 @@ build/
 
 *.iml
 
+*.keystore
+signing.properties
 local.properties

@@ -23,16 +23,25 @@ android {
         versionName '3.0'
     }
 
+    signingConfigs {
+        release
+    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFile getDefaultProguardFile('proguard-android.txt')
+            signingConfig signingConfigs.release
         }
     }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    lintOptions {
+        abortOnError false
     }
 }
 
@@ -49,3 +58,6 @@ dependencies {
     apt 'org.immutables:value:2.1.14'
     provided 'org.immutables:value:2.1.14'
 }
+
+apply from: 'https://raw.github.com/trikita/gradle-android-signing/master/gradle-android-signing.gradle'
+
