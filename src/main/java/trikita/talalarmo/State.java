@@ -59,7 +59,7 @@ public interface State {
                             .ringtone(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM).toString())
                             .ramping(true)
                             .snap(true)
-                            .vibrate(false)
+                            .vibrate(true)
                             .theme(0)
                             .build())
                     .build();

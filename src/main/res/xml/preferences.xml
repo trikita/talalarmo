@@ -10,9 +10,8 @@
 		android:key="ringtone_setting"
 		android:title="@string/settings_ringtone_option"
 		android:summary="@string/settings_ringtone_option_summary"
-		android:showDefault="true"
 		android:showSilent="true"
-		android:defaultValue="Default"
+		android:showDefault="true"
 		android:ringtoneType="ringtone|alarm"
 		/>
 	<CheckBoxPreference
