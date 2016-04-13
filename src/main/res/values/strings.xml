@@ -30,8 +30,8 @@
     <string name="settings_theme_option_summary">Select the theme</string>
 
     <string-array name="settings_themes">
-        <item>Holo Light</item>
-        <item>Holo Dark</item>
+        <item>Light</item>
+        <item>Dark</item>
     </string-array>
     <string-array name="settings_themes_values">
         <item>0</item>
