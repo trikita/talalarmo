@@ -32,9 +32,9 @@ It does only one function but does it well. Only one alarm time is supported and
 
 * [Anvil](https://github.com/zserge/anvil) for reactive UI
 * [Jedux](https://github.com/trikita/jedux) for Redux architecture
+* [Immutables](https://immutables.github.io) for Redux state builders
 
 ## License
 
 Code is distributed under MIT license, feel free to use it. Just please, don't upload Talalarmo clones to Google Play (they are likely to be rejected anyway).
 
-## License
