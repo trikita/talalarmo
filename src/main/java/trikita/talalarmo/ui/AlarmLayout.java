@@ -2,18 +2,13 @@ package trikita.talalarmo.ui;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
-import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.CompoundButton;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
-import android.widget.PopupWindow;
 
 import trikita.anvil.Anvil;
-import trikita.anvil.RenderableView;
 import trikita.jedux.Action;
 import trikita.talalarmo.Actions;
 import trikita.talalarmo.App;
@@ -221,7 +216,7 @@ public class AlarmLayout {
                 textSize(dip(32));
                 textColor(Theme.get(App.getState().settings().theme()).secondaryTextColor);
                 padding(dip(15));
-                onClick(v -> showSettingsMenu(v));
+                onClick(AlarmLayout::showSettingsMenu);
             });
         });
     }

@@ -1,9 +1,6 @@
 package trikita.talalarmo.ui;
 
-import android.graphics.drawable.Drawable;
-
 import trikita.anvil.Anvil;
-import trikita.talalarmo.R;
 
 import static trikita.anvil.DSL.*;
 
