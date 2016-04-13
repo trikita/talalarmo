@@ -46,7 +46,7 @@ public class AlarmLayout {
             size(FILL, WRAP);
             gravity(CENTER_VERTICAL);
             Theme.materialIcon(() -> {
-                textColor(Theme.get(App.getState().settings().theme()).primaryTextColor);
+                textColor(Theme.get(App.getState().settings().theme()).secondaryTextColor);
                 textSize(dip(32));
                 padding(dip(15));
                 text("\ue855"); // "alarm" icon
@@ -69,7 +69,7 @@ public class AlarmLayout {
             gravity(LEFT | CENTER_VERTICAL);
             typeface("fonts/Roboto-Light.ttf");
             textSize(dip(32));
-            textColor(Theme.get(App.getState().settings().theme()).secondaryTextColor);
+            textColor(Theme.get(App.getState().settings().theme()).primaryTextColor);
             text(R.string.tv_start_alarm_text);
             onClick(v -> App.dispatch(new Action<>(Actions.Alarm.ON)));
         });
@@ -116,7 +116,7 @@ public class AlarmLayout {
                     layoutGravity(CENTER);
                     typeface("fonts/Roboto-Light.ttf");
                     textSize(hourCircleSize * 0.3f);
-                    textColor(Theme.get(App.getState().settings().theme()).secondaryTextColor);
+                    textColor(Theme.get(App.getState().settings().theme()).primaryColor);
                 });
             });
 
@@ -146,7 +146,7 @@ public class AlarmLayout {
                     layoutGravity(CENTER);
                     typeface("fonts/Roboto-Light.ttf");
                     textSize(minuteCircleSize * 0.3f);
-                    textColor(Theme.get(App.getState().settings().theme()).secondaryTextColor);
+                    textColor(Theme.get(App.getState().settings().theme()).primaryColor);
                 });
             });
 
@@ -165,7 +165,7 @@ public class AlarmLayout {
     private static void bottomBar() {
         linearLayout(() -> {
             size(FILL, dip(62));
-            backgroundColor(Theme.get(App.getState().settings().theme()).backgroundTranscluentColor);
+            backgroundColor(Theme.get(App.getState().settings().theme()).backgroundTranslucentColor);
 
             Theme.materialIcon(() -> {
                 text("\ue857"); // ALARM OFF
@@ -239,7 +239,6 @@ public class AlarmLayout {
                 intent.putExtra(Intent.EXTRA_SUBJECT, c.getString(R.string.feedback_email_subject));
                 v.getContext().startActivity(Intent.createChooser(intent, c.getString(R.string.dlg_email_chooser_title)));
             }
-            System.out.println("" + item.getItemId());
             return true;
         });
         menu.show();

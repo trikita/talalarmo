@@ -38,13 +38,13 @@ public class MainActivity extends Activity {
 
     private void updateTheme() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            if (App.getState().settings().theme() == 0) {
+            if (Theme.get(App.getState().settings().theme()).light) {
                 setTheme(android.R.style.Theme_Holo_Light_NoActionBar);
             } else {
                 setTheme(android.R.style.Theme_Holo_NoActionBar);
             }
         } else {
-            if (App.getState().settings().theme() == 0) {
+            if (Theme.get(App.getState().settings().theme()).light) {
                 setTheme(android.R.style.Theme_Material_Light_NoActionBar);
             } else {
                 setTheme(android.R.style.Theme_Material_NoActionBar);

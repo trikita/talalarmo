@@ -26,12 +26,20 @@ public class AlarmActivity extends Activity {
         mWakeLock.acquire();
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
 
+        // fill statusbar with a theme dark color on post-Lollipop devices
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.setStatusBarColor(Theme.get(App.getState().settings().theme()).primaryDarkColor);
+        }
+
         setContentView(new RenderableView(this) {
             public void view() {
                 Theme.materialIcon(() -> {
                     size(FILL, FILL);
                     text("\ue857"); // "alarm off"
-                    textColor(Theme.get(App.getState().settings().theme()).secondaryTextColor);
+                    textColor(Theme.get(App.getState().settings().theme()).accentColor);
                     textSize(dip(128));
                     backgroundColor(Theme.get(App.getState().settings().theme()).backgroundColor);
                     onClick(v -> {
