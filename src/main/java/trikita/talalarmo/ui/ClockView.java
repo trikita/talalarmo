@@ -61,15 +61,15 @@ public class ClockView extends SeekBar {
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		PointF p = new PointF(event.getX(), event.getY());
+		double max = getMax() / Math.PI / 2;
 		if (event.getAction() == MotionEvent.ACTION_DOWN ||
 				event.getAction() == MotionEvent.ACTION_MOVE) {
 			if (isTouched(p)) {
-				double angle = pointToAngle(p);
-				mListener.onProgressChanged(this, (int) (angle / Math.PI / 2 * getMax()), true);
+				mListener.onProgressChanged(this, (int) Math.round(pointToAngle(p) * max), true);
 				return true;
 			}
 		} else if (event.getAction() == MotionEvent.ACTION_UP) {
-			mListener.onProgressChanged(this, (int) (pointToAngle(p)/ Math.PI / 2 * getMax()), true);
+			mListener.onProgressChanged(this, (int) Math.round(pointToAngle(p) * max), true);
 			return true;
 		}
 		return false;
