@@ -127,8 +127,7 @@ public class AlarmLayout {
                     onSeekBarChange((v, progress, fromUser) -> {
                         if (fromUser) {
                             if (App.getState().settings().snap()) {
-                                progress = progress / 5;
-                                progress = progress * 5;
+                                progress = (int) (Math.round(progress / 5.0) * 5) % 60;
                             }
                             App.dispatch(new Action<>(Actions.Alarm.SET_MINUTE, progress));
                         }
