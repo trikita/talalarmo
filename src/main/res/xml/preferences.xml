@@ -3,13 +3,11 @@
 	<CheckBoxPreference
 		android:key="vibration_setting"
 		android:title="@string/settings_vibration_option"
-		android:summary="@string/settings_vibration_option_summary"
 		android:defaultValue="true"
 		/>
 	<RingtonePreference
 		android:key="ringtone_setting"
 		android:title="@string/settings_ringtone_option"
-		android:summary="@string/settings_ringtone_option_summary"
 		android:showSilent="true"
 		android:showDefault="true"
 		android:ringtoneType="ringtone|alarm"
@@ -17,19 +15,16 @@
 	<CheckBoxPreference
 		android:key="snap_setting"
 		android:title="@string/settings_snap_option"
-		android:summary="@string/settings_snap_option_summary"
 		android:defaultValue="true"
 		/>
 	<CheckBoxPreference
 		android:key="ramping_setting"
 		android:title="@string/settings_volume_increase_option"
-		android:summary="@string/settings_volume_increase_option_summary"
 		android:defaultValue="true"
 		/>
 	<ListPreference
 		android:key="theme_setting"
 		android:title="@string/settings_theme_option"
-		android:summary="@string/settings_theme_option_summary"
 		android:defaultValue="0"
 		android:entries="@array/settings_themes"
 		android:entryValues="@array/settings_themes_values"

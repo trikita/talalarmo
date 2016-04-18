@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Talalarmo</string>
+    <string name="leave_feedback">Оставить отзыв</string>
+    <string name="settings">Настройки</string>
+    <string name="settings_ringtone_option">Мелодия будильника</string>
+    <string name="settings_snap_option">Округлять до 5 минут</string>
+    <string name="settings_theme_option">Тема оформления</string>
+    <string name="settings_vibration_option">Вибросигнал</string>
+    <string name="settings_volume_increase_option">Нарастающая громкость</string>
+    <string name="tv_start_alarm_text">Нажмите, чтобы\nустановить будильник</string>
+
+    <string name="hour">1 час</string>
+    <string name="hours">%s ч.</string>
+    <string name="minute">1 минуту</string>
+    <string name="minutes">%s мин.</string>
+
+    <string-array name="alarm_set">
+        <item>До срабатывания будильника осталось меньше одной минуты</item>
+        <item>Будильник зазвонит через %1$s</item>
+        <item>Будильник зазвонит через %2$s</item>
+        <item>Будильник зазвонит через %1$s и %2$s</item>
+    </string-array>
+    <string-array name="settings_themes">
+        <item>Светлая тема</item>
+        <item>Темная тема</item>
+    </string-array>
+</resources>

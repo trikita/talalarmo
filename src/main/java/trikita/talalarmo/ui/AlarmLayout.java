@@ -178,36 +178,7 @@ public class AlarmLayout {
                 textSize(dip(16));
                 textColor(Theme.get(App.getState().settings().theme()).primaryTextColor);
                 gravity(CENTER | CENTER_VERTICAL);
-                if (App.getState().alarm().on()) {
-                    long t = App.getState().alarm().nextAlarm().getTimeInMillis() - System.currentTimeMillis() - 1;
-                    t = t / 60 / 1000;
-                    int m = (int) (t % 60);
-                    t = t / 60;
-                    String alarmTime = "";
-                    if (t > 0) {
-                        if (t == 1) {
-                            alarmTime = alarmTime + "1 hour";
-                        } else {
-                            alarmTime = alarmTime + t + " hours";
-                        }
-                    }
-                    if (m > 0) {
-                        if (t > 0) {
-                            alarmTime = alarmTime + " ";
-                        }
-                        if (m == 1) {
-                            alarmTime = alarmTime + "1 minute";
-                        } else {
-                            alarmTime = alarmTime + m + " minutes";
-                        }
-                    }
-                    if (t != 0 || m != 0) {
-                        alarmTime = alarmTime + " from ";
-                    }
-                    text("Alarm set for " + alarmTime + "now");
-                } else {
-                    text("");
-                }
+                text(formatAlarmTime(Anvil.currentView().getContext()));
             });
 
             Theme.materialIcon(() -> {
@@ -220,6 +191,29 @@ public class AlarmLayout {
         });
     }
 
+    private static String formatAlarmTime(Context c) {
+        if (!App.getState().alarm().on()) {
+            return "";
+        }
+        long t = App.getState().alarm().nextAlarm().getTimeInMillis() - System.currentTimeMillis() - 1;
+        t = t / 60 / 1000;
+        int m = (int) (t % 60);
+        int h = (int) (t / 60);
+
+        String minSeq = (m == 0) ? "" :
+                (m == 1) ? c.getString(R.string.minute) :
+                        c.getString(R.string.minutes, Long.toString(m));
+
+        String hourSeq = (h == 0) ? "" :
+                (h == 1) ? c.getString(R.string.hour) :
+                        c.getString(R.string.hours, Long.toString(h));
+
+        int index = ((h > 0) ? 1 : 0) | ((m > 0)? 2 : 0);
+
+        String[] formats = c.getResources().getStringArray(R.array.alarm_set);
+        return String.format(formats[index], hourSeq, minSeq);
+    }
+
     private static void showSettingsMenu(View v) {
         PopupMenu menu = new PopupMenu(v.getContext(), v);
         menu.getMenuInflater().inflate(R.menu.overflow_popup, menu.getMenu());
@@ -230,8 +224,8 @@ public class AlarmLayout {
                 Context c = v.getContext();
                 Intent intent = new Intent(Intent.ACTION_SENDTO,
                         Uri.fromParts("mailto", "adm.trikita@gmail.com", null));
-                intent.putExtra(Intent.EXTRA_SUBJECT, c.getString(R.string.feedback_email_subject));
-                v.getContext().startActivity(Intent.createChooser(intent, c.getString(R.string.dlg_email_chooser_title)));
+                intent.putExtra(Intent.EXTRA_SUBJECT, "Feedback about Talalarmo");
+                v.getContext().startActivity(Intent.createChooser(intent, c.getString(R.string.leave_feedback)));
             }
             return true;
         });
