@@ -2,6 +2,8 @@ package trikita.talalarmo;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Window;
@@ -20,6 +22,7 @@ public class MainActivity extends Activity {
         super.onCreate(b);
 
         updateTheme();
+
         setContentView(new RenderableView(this) {
             public void view() {
                 AlarmLayout.view();
@@ -64,5 +67,17 @@ public class MainActivity extends Activity {
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             window.setStatusBarColor(Theme.get(App.getState().settings().theme()).primaryDarkColor);
         }
+    }
+
+    private boolean isTablet() {
+        System.out.println("screenLayout = " + getResources().getConfiguration().screenLayout);
+        System.out.println("mask = " + Configuration.SCREENLAYOUT_SIZE_MASK);
+        System.out.println("large = " + Configuration.SCREENLAYOUT_SIZE_LARGE);
+        System.out.println("xlarge = " + Configuration.SCREENLAYOUT_SIZE_XLARGE);
+        System.out.println("isTablet = " +
+                (getResources().getConfiguration().screenLayout &
+                        Configuration.SCREENLAYOUT_SIZE_MASK));
+        return (getResources().getConfiguration().screenLayout &
+                Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_LARGE;
     }
 }

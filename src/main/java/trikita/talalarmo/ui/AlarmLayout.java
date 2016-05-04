@@ -80,14 +80,29 @@ public class AlarmLayout {
                 Anvil.currentView().post(Anvil::render);
             }
 
-            int hourCircleSize = (int) (w * 1.1f * 0.62f);
-            int minuteCircleSize = (int) (hourCircleSize * 0.62f);
-            int amPmWidth = (int) (hourCircleSize * 0.62f * 0.62f);
+            int hourCircleSize;
+            int minuteCircleSize;
+            int amPmWidth;
+
+            if (isPortrait()) {
+                hourCircleSize = (int) (w * 1.1f * 0.62f);
+                minuteCircleSize = (int) (hourCircleSize * 0.62f);
+                amPmWidth = (int) (hourCircleSize * 0.62f * 0.62f);
+            } else {
+                hourCircleSize = (int) (h);
+                minuteCircleSize = (int) (hourCircleSize * 0.62f);
+                amPmWidth = (int) (hourCircleSize * 0.62f * 0.62f);
+            }
 
             frameLayout(() -> {
                 size(hourCircleSize, hourCircleSize);
-                x(w/2 - hourCircleSize * 0.21f - hourCircleSize/2);
-                y(h/2 + hourCircleSize * 0.19f - hourCircleSize/2);
+                if (isPortrait()) {
+                    x(w / 2 - hourCircleSize * 0.21f - hourCircleSize / 2);
+                    y(h / 2 + hourCircleSize * 0.19f - hourCircleSize / 2);
+                } else {
+                    x(w / 2 - hourCircleSize * 0.38f - hourCircleSize / 2);
+                    y(h / 2 + hourCircleSize * 0.00f - hourCircleSize / 2);
+                }
                 gravity(CENTER);
                 v(ClockView.class, () -> {
                     size(FILL, FILL);
@@ -117,8 +132,13 @@ public class AlarmLayout {
 
             frameLayout(() -> {
                 size(minuteCircleSize, minuteCircleSize);
-                x(w/2 - hourCircleSize * 0.25f + minuteCircleSize/2);
-                y(h/2 + hourCircleSize * 0.05f - hourCircleSize/2 - minuteCircleSize/2);
+                if (isPortrait()) {
+                    x(w / 2 - hourCircleSize * 0.25f + minuteCircleSize / 2);
+                    y(h / 2 + hourCircleSize * 0.05f - hourCircleSize / 2 - minuteCircleSize / 2);
+                } else {
+                    x(w / 2 - hourCircleSize * 0.25f + minuteCircleSize / 2);
+                    y(h / 2 + hourCircleSize * 0.28f - hourCircleSize / 2 - minuteCircleSize / 2);
+                }
                 gravity(CENTER);
                 v(ClockView.class, () -> {
                     size(FILL, FILL);
@@ -146,8 +166,13 @@ public class AlarmLayout {
 
             v(AmPmSwitch.class, () -> {
                 size(amPmWidth, (int) (amPmWidth/1.5f));
-                x(w/2 - hourCircleSize * 0.21f - amPmWidth*3/4);
-                y(h/2 + hourCircleSize * 0.05f - hourCircleSize/2 - amPmWidth/1.5f/2);
+                if (isPortrait()) {
+                    x(w / 2 - hourCircleSize * 0.21f - amPmWidth * 3 / 4);
+                    y(h / 2 + hourCircleSize * 0.05f - hourCircleSize / 2 - amPmWidth / 1.5f / 2);
+                } else {
+                    x(w / 2 - hourCircleSize * 0.25f + minuteCircleSize - amPmWidth / 2);
+                    y(h / 2 + hourCircleSize * 0.25f - amPmWidth / 1.5f / 2);
+                }
                 checked(App.getState().alarm().am());
                 onCheckedChange((CompoundButton buttonView, boolean isChecked) -> {
                     App.dispatch(new Action<>(Actions.Alarm.SET_AM_PM, isChecked));
