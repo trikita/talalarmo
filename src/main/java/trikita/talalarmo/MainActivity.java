@@ -69,15 +69,4 @@ public class MainActivity extends Activity {
         }
     }
 
-    private boolean isTablet() {
-        System.out.println("screenLayout = " + getResources().getConfiguration().screenLayout);
-        System.out.println("mask = " + Configuration.SCREENLAYOUT_SIZE_MASK);
-        System.out.println("large = " + Configuration.SCREENLAYOUT_SIZE_LARGE);
-        System.out.println("xlarge = " + Configuration.SCREENLAYOUT_SIZE_XLARGE);
-        System.out.println("isTablet = " +
-                (getResources().getConfiguration().screenLayout &
-                        Configuration.SCREENLAYOUT_SIZE_MASK));
-        return (getResources().getConfiguration().screenLayout &
-                Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_LARGE;
-    }
 }

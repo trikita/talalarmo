@@ -2,6 +2,7 @@ package trikita.talalarmo.ui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -73,7 +74,13 @@ public class AlarmLayout {
     private static void alarmOnLayout() {
         frameLayout(() -> {
             size(FILL, FILL);
-            margin(dip(8));
+            // On tablets leave some margin around the clock view to avoid gigantic circles
+            if ((Anvil.currentView().getResources().getConfiguration().screenLayout &
+                    Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_LARGE) {
+                 margin(dip(48));
+            } else {
+                 margin(dip(8));
+             }
             int w = Anvil.currentView().getWidth();
             int h = Anvil.currentView().getHeight();
             if (h == 0 || w == 0) {
