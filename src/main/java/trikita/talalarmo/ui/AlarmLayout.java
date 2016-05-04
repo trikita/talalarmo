@@ -64,6 +64,7 @@ public class AlarmLayout {
             padding(dip(20));
             gravity(LEFT | CENTER_VERTICAL);
             typeface("fonts/Roboto-Light.ttf");
+            allCaps(true);
             textSize(dip(32));
             textColor(Theme.get(App.getState().settings().theme()).primaryTextColor);
             text(R.string.tv_start_alarm_text);
