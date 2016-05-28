@@ -44,18 +44,26 @@ public class AlarmActivity extends Activity {
                     textColor(Theme.get(App.getState().settings().theme()).accentColor);
                     textSize(dip(128));
                     backgroundColor(Theme.get(App.getState().settings().theme()).backgroundColor);
-                    onClick(v -> {
-                        App.dispatch(new Action<>(Actions.Alarm.DISMISS));
-                        finish();
-                    });
+                    onClick(v -> stopAlarm());
                 });
             }
         });
     }
 
     @Override
+    protected void onStop() {
+        stopAlarm();
+        super.onStop();
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         mWakeLock.release();
+    }
+
+    private void stopAlarm() {
+        App.dispatch(new Action<>(Actions.Alarm.DISMISS));
+        finish();
     }
 }
