@@ -19,8 +19,8 @@ android {
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 14
-        versionName '3.4'
+        versionCode 15
+        versionName '3.5'
     }
 
     signingConfigs {
@@ -47,7 +47,7 @@ android {
 
 repositories {
     jcenter()
-    maven { url = 'https://jitpack.io/'}
+    maven { url 'https://jitpack.io/'}
 }
 
 dependencies {
