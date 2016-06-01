@@ -28,6 +28,11 @@ It does only one function but does it well. Only one alarm time is supported and
 * Wake up easily with gentle alarm (gradually increasing alarm volume)
 * Dark and light themes
 
+## Download
+
+* [F-Droid](https://f-droid.org/repository/browse/?fdid=trikita.talalarmo)
+* [Google Play](https://play.google.com/store/apps/details?id=trikita.talalarmo)
+
 ## Libraries
 
 * [Anvil](https://github.com/zserge/anvil) for reactive UI
