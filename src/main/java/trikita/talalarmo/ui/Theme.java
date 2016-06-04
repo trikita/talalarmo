@@ -8,7 +8,9 @@ public enum Theme {
     LIGHT(0xffffffff, 0x0f555555, 0xff666666, 0xff0097a7, 0xff00bcd4,
             0xff212121, 0xff727272, true),
     DARK(0xff002b36, 0x40002129, 0xffcbd2d2, 0xff002129, 0xffe91e63,
-            0xddfdf6e3, 0xff93a1a1, true);
+            0xddfdf6e3, 0xff93a1a1, true),
+    AMOLED(0xff000000, 0xff0a0a0a, 0xffcccccc, 0xff000000, 0xffc51162,
+            0xffcccccc, 0xffbbbbbb, true);
 
     public final int backgroundColor;
     public final int backgroundTranslucentColor;
@@ -33,10 +35,15 @@ public enum Theme {
     }
 
     public static Theme get(int index) {
-        if (index == 0) {
-            return LIGHT;
-        } else {
-            return DARK;
+        switch (index) {
+            case 0:
+                return LIGHT;
+            case 1:
+                return DARK;
+            case 2:
+                return AMOLED;
+            default:
+                return LIGHT;
         }
     }
 
