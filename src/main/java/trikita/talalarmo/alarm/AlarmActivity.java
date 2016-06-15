@@ -51,9 +51,9 @@ public class AlarmActivity extends Activity {
     }
 
     @Override
-    protected void onStop() {
+    protected void onUserLeaveHint() {
         stopAlarm();
-        super.onStop();
+        super.onUserLeaveHint();
     }
 
     @Override
