@@ -57,6 +57,12 @@ public class AlarmActivity extends Activity {
     }
 
     @Override
+    public void onBackPressed() {
+        stopAlarm();
+        super.onBackPressed();
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         mWakeLock.release();

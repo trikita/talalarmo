@@ -108,13 +108,6 @@ public class AlarmController implements Store.Middleware<Action, State> {
                         PowerManager.ON_AFTER_RELEASE, "AlarmReceiver");
         wl.acquire(5000);
         mContext.startService(new Intent(mContext, AlarmService.class));
-        // Start the activity where you can stop alarm
-        Intent i = new Intent(Intent.ACTION_MAIN);
-        i.setComponent(new ComponentName(mContext, AlarmActivity.class));
-        i.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP |
-                Intent.FLAG_ACTIVITY_NEW_TASK |
-                Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
-        mContext.startActivity(i);
     }
 
     private void dismissAlarm() {

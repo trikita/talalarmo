@@ -1,6 +1,7 @@
 package trikita.talalarmo.alarm;
 
 import android.app.Service;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
@@ -44,7 +45,7 @@ public class AlarmService extends Service {
         @Override
         public void run() {
             // increase volume level until reach max value
-            if (mVolumeLevel < MAX_VOLUME) {
+            if (mPlayer != null && mVolumeLevel < MAX_VOLUME) {
                 mVolumeLevel += VOLUME_INCREASE_STEP;
                 mPlayer.setVolume(mVolumeLevel, mVolumeLevel);
                 // set next increase in 600ms
@@ -70,7 +71,14 @@ public class AlarmService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        mHandler.post(this::startPlayer);
+        startPlayer();
+        // Start the activity where you can stop alarm
+        Intent i = new Intent(Intent.ACTION_MAIN);
+        i.setComponent(new ComponentName(this, AlarmActivity.class));
+        i.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP |
+                Intent.FLAG_ACTIVITY_NEW_TASK |
+                Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+        startActivity(i);
         return START_STICKY;
     }
 
@@ -83,6 +91,8 @@ public class AlarmService extends Service {
     public void onDestroy() {
         if (mPlayer.isPlaying()) {
             mPlayer.stop();
+            mPlayer.release();
+            mPlayer = null;
         }
         mHandler.removeCallbacksAndMessages(null);
     }
