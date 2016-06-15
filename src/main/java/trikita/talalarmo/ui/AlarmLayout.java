@@ -4,10 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
+import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
+
+import static trikita.anvil.DSL.*;
 
 import trikita.anvil.Anvil;
 import trikita.jedux.Action;
@@ -15,8 +18,6 @@ import trikita.talalarmo.Actions;
 import trikita.talalarmo.App;
 import trikita.talalarmo.MainActivity;
 import trikita.talalarmo.R;
-
-import static trikita.anvil.DSL.*;
 
 public class AlarmLayout {
     public static void view() {
@@ -126,10 +127,14 @@ public class AlarmLayout {
                 textView(() -> {
                     size(WRAP, WRAP);
                     int hours = App.getState().alarm().hours();
-                    if (hours == 0) {
-                        text("12");
+                    if (DateFormat.is24HourFormat(Anvil.currentView().getContext())) {
+                        text(String.format("%02d", hours + (App.getState().alarm().am() ? 0 : 12)));
                     } else {
-                        text(String.format("%02d", hours));
+                        if (hours == 0) {
+                            text("12");
+                        } else {
+                            text(String.format("%02d", hours));
+                        }
                     }
                     layoutGravity(CENTER);
                     typeface("fonts/Roboto-Light.ttf");
