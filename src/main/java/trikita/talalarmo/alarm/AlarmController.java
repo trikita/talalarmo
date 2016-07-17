@@ -2,7 +2,6 @@ package trikita.talalarmo.alarm;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -66,7 +65,7 @@ public class AlarmController implements Store.Middleware<Action, State> {
 
         AlarmManager am = (AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {		// KITKAT and later
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {        // KITKAT and later
                 am.set(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), sender);
             } else {
                 am.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), sender);

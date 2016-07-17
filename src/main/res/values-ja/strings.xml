@@ -25,8 +25,4 @@
         <item>ライト</item>
         <item>ダーク</item>
     </string-array>
-    <string-array name="settings_themes_values">
-        <item>0</item>
-        <item>1</item>
-    </string-array>
 </resources>

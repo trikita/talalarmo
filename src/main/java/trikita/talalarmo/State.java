@@ -17,18 +17,26 @@ public interface State {
     @Value.Immutable
     interface Settings {
         boolean vibrate();
+
         boolean snap();
+
         boolean ramping();
+
         String ringtone();
+
         int theme();
     }
 
     @Value.Immutable
     abstract class Alarm {
         public abstract boolean on();
+
         public abstract int minutes();
+
         public abstract int hours();
+
         public abstract boolean am();
+
         public Calendar nextAlarm() {
             Calendar c = Calendar.getInstance();
             c.set(Calendar.AM_PM, (am() ? Calendar.AM : Calendar.PM));
@@ -44,6 +52,7 @@ public interface State {
     }
 
     Settings settings();
+
     Alarm alarm();
 
     class Default {
@@ -73,6 +82,7 @@ public interface State {
                     .settings(reduceSettings(action, currentState.settings()))
                     .build();
         }
+
         State.Settings reduceSettings(Action action, State.Settings settings) {
             if (action.type instanceof Actions.Settings) {
                 Actions.Settings type = (Actions.Settings) action.type;

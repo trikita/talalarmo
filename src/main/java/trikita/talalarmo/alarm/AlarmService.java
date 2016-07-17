@@ -1,12 +1,16 @@
 package trikita.talalarmo.alarm;
 
+import android.Manifest;
 import android.app.Service;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
@@ -108,7 +112,13 @@ public class AlarmService extends Service {
                 mHandler.post(mVibrationRunnable);
             }
             // Player setup is here
-            mPlayer.setDataSource(this, Uri.parse(App.getState().settings().ringtone()));
+            String ringtone = App.getState().settings().ringtone();
+            if (ringtone.startsWith("content://media/external/audio/media/") &&
+                    Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
+                    checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
+                ringtone = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM).toString();
+            }
+            mPlayer.setDataSource(this, Uri.parse(ringtone));
             mPlayer.setLooping(true);
             mPlayer.setAudioStreamType(AudioManager.STREAM_ALARM);
             mPlayer.setVolume(mVolumeLevel, mVolumeLevel);
