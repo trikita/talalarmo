@@ -1,7 +1,9 @@
 package trikita.talalarmo;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.media.RingtoneManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -52,6 +54,11 @@ public class SettingsActivity extends Activity
                 break;
             case "ringtone_setting":
                 String s = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM).toString();
+                if (prefs.getString(key, s).startsWith("content://media/external/audio/media/") &&
+                        Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
+                        checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
+                    requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 0);
+                }
                 App.dispatch(new Action<>(Actions.Settings.SET_RINGTONE, prefs.getString(key, s)));
                 break;
             case "theme_setting":
