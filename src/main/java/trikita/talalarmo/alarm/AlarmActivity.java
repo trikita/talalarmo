@@ -16,6 +16,7 @@ import trikita.talalarmo.Actions;
 import trikita.talalarmo.App;
 import trikita.talalarmo.ui.Theme;
 
+
 public class AlarmActivity extends Activity {
     private PowerManager.WakeLock mWakeLock;
 

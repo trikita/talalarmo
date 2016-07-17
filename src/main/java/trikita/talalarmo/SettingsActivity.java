@@ -3,15 +3,15 @@ package trikita.talalarmo;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.media.RingtoneManager;
-import android.os.Bundle;
 import android.os.Build;
+import android.os.Bundle;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 
 import trikita.jedux.Action;
 
 public class SettingsActivity extends Activity
-    implements SharedPreferences.OnSharedPreferenceChangeListener {
+        implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +34,8 @@ public class SettingsActivity extends Activity
         prefs.registerOnSharedPreferenceChangeListener(this);
 
         getFragmentManager().beginTransaction()
-            .replace(android.R.id.content, new SettingsFragment())
-            .commit();
+                .replace(android.R.id.content, new SettingsFragment())
+                .commit();
     }
 
     @Override
