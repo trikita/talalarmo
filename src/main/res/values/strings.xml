@@ -29,4 +29,5 @@
         <item>0</item>
         <item>1</item>
     </string-array>
+    <string name="settings_detect_clock_format">Detect 24h/12h Format</string>
 </resources>

@@ -10,14 +10,46 @@ import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 
-import static trikita.anvil.DSL.*;
-
 import trikita.anvil.Anvil;
 import trikita.jedux.Action;
 import trikita.talalarmo.Actions;
 import trikita.talalarmo.App;
 import trikita.talalarmo.MainActivity;
 import trikita.talalarmo.R;
+
+import static trikita.anvil.DSL.CENTER;
+import static trikita.anvil.DSL.CENTER_VERTICAL;
+import static trikita.anvil.DSL.FILL;
+import static trikita.anvil.DSL.LEFT;
+import static trikita.anvil.DSL.WRAP;
+import static trikita.anvil.DSL.allCaps;
+import static trikita.anvil.DSL.backgroundColor;
+import static trikita.anvil.DSL.checked;
+import static trikita.anvil.DSL.dip;
+import static trikita.anvil.DSL.frameLayout;
+import static trikita.anvil.DSL.gravity;
+import static trikita.anvil.DSL.isPortrait;
+import static trikita.anvil.DSL.layoutGravity;
+import static trikita.anvil.DSL.linearLayout;
+import static trikita.anvil.DSL.margin;
+import static trikita.anvil.DSL.max;
+import static trikita.anvil.DSL.onCheckedChange;
+import static trikita.anvil.DSL.onClick;
+import static trikita.anvil.DSL.onSeekBarChange;
+import static trikita.anvil.DSL.orientation;
+import static trikita.anvil.DSL.padding;
+import static trikita.anvil.DSL.progress;
+import static trikita.anvil.DSL.size;
+import static trikita.anvil.DSL.text;
+import static trikita.anvil.DSL.textColor;
+import static trikita.anvil.DSL.textSize;
+import static trikita.anvil.DSL.textView;
+import static trikita.anvil.DSL.typeface;
+import static trikita.anvil.DSL.v;
+import static trikita.anvil.DSL.visibility;
+import static trikita.anvil.DSL.weight;
+import static trikita.anvil.DSL.x;
+import static trikita.anvil.DSL.y;
 
 public class AlarmLayout {
     public static void view() {
@@ -103,6 +135,12 @@ public class AlarmLayout {
                 amPmWidth = (int) (hourCircleSize * 0.62f * 0.62f);
             }
 
+            final boolean is24hFormat = App.getState().settings().detectClockFormat() &&
+                    DateFormat.is24HourFormat(Anvil.currentView().getContext());
+            final boolean isPM = !App.getState().alarm().am();
+            int hours = App.getState().alarm().hours() + (is24hFormat && isPM ? 12 : 0);
+            final int clockSize = (is24hFormat ? 24 : 12);
+            
             frameLayout(() -> {
                 size(hourCircleSize, hourCircleSize);
                 if (isPortrait()) {
@@ -113,28 +151,25 @@ public class AlarmLayout {
                     y(h / 2 + hourCircleSize * 0.00f - hourCircleSize / 2);
                 }
                 gravity(CENTER);
+
                 v(ClockView.class, () -> {
                     size(FILL, FILL);
-                    progress(App.getState().alarm().hours());
-                    max(12);
+                    progress(hours);
+                    max(clockSize);
                     onSeekBarChange((v, progress, fromUser) -> {
                         if (fromUser) {
-                            App.dispatch(new Action<>(Actions.Alarm.SET_HOUR, progress));
+                            int offset = is24hFormat && isPM ? 12 : 0;
+                            App.dispatch(new Action<>(Actions.Alarm.SET_HOUR, progress - offset));
                         }
                     });
                     Anvil.currentView().invalidate();
                 });
                 textView(() -> {
                     size(WRAP, WRAP);
-                    int hours = App.getState().alarm().hours();
-                    if (DateFormat.is24HourFormat(Anvil.currentView().getContext())) {
-                        text(String.format("%02d", hours + (App.getState().alarm().am() ? 0 : 12)));
+                    if (is24hFormat) {
+                        text(String.format("%02d", hours));
                     } else {
-                        if (hours == 0) {
-                            text("12");
-                        } else {
-                            text(String.format("%02d", hours));
-                        }
+                        text(clockSize);
                     }
                     layoutGravity(CENTER);
                     typeface("fonts/Roboto-Light.ttf");
@@ -177,20 +212,22 @@ public class AlarmLayout {
                 });
             });
 
-            v(AmPmSwitch.class, () -> {
-                size(amPmWidth, (int) (amPmWidth / 1.5f));
-                if (isPortrait()) {
-                    x(w / 2 - hourCircleSize * 0.21f - amPmWidth * 3 / 4);
-                    y(h / 2 + hourCircleSize * 0.05f - hourCircleSize / 2 - amPmWidth / 1.5f / 2);
-                } else {
-                    x(w / 2 - hourCircleSize * 0.25f + minuteCircleSize - amPmWidth / 2);
-                    y(h / 2 + hourCircleSize * 0.25f - amPmWidth / 1.5f / 2);
-                }
-                checked(App.getState().alarm().am());
-                onCheckedChange((CompoundButton buttonView, boolean isChecked) -> {
-                    App.dispatch(new Action<>(Actions.Alarm.SET_AM_PM, isChecked));
+            if(!is24hFormat) {
+                v(AmPmSwitch.class, () -> {
+                    size(amPmWidth, (int) (amPmWidth / 1.5f));
+                    if (isPortrait()) {
+                        x(w / 2 - hourCircleSize * 0.21f - amPmWidth * 3 / 4);
+                        y(h / 2 + hourCircleSize * 0.05f - hourCircleSize / 2 - amPmWidth / 1.5f / 2);
+                    } else {
+                        x(w / 2 - hourCircleSize * 0.25f + minuteCircleSize - amPmWidth / 2);
+                        y(h / 2 + hourCircleSize * 0.25f - amPmWidth / 1.5f / 2);
+                    }
+                    checked(App.getState().alarm().am());
+                    onCheckedChange((CompoundButton buttonView, boolean isChecked) -> {
+                        App.dispatch(new Action<>(Actions.Alarm.SET_AM_PM, isChecked));
+                    });
                 });
-            });
+            }
         });
     }
 

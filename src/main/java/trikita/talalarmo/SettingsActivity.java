@@ -70,6 +70,9 @@ public class SettingsActivity extends Activity
                 }
                 App.dispatch(new Action<>(Actions.Settings.SET_THEME, themeIndex));
                 break;
+            case "clock_format_setting":
+                App.dispatch(new Action<>(Actions.Settings.SET_DETECT_CLOCK_FORMAT, prefs.getBoolean(key, false)));
+                break;
         }
     }
 
