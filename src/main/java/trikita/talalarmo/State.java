@@ -25,6 +25,9 @@ public interface State {
         String ringtone();
 
         int theme();
+
+        boolean detectClockFormat();
+
     }
 
     @Value.Immutable
@@ -70,6 +73,7 @@ public interface State {
                             .snap(true)
                             .vibrate(true)
                             .theme(0)
+                            .detectClockFormat(false)
                             .build())
                     .build();
         }
@@ -97,6 +101,8 @@ public interface State {
                         return ImmutableSettings.copyOf(settings).withRingtone((String) action.value);
                     case SET_THEME:
                         return ImmutableSettings.copyOf(settings).withTheme((Integer) action.value);
+                    case SET_DETECT_CLOCK_FORMAT:
+                        return ImmutableSettings.copyOf(settings).withDetectClockFormat((Boolean) action.value);
                 }
             }
             return settings;

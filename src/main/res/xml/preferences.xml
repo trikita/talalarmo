@@ -22,6 +22,11 @@
 		android:title="@string/settings_volume_increase_option"
 		android:defaultValue="true"
 		/>
+	<CheckBoxPreference
+		android:key="clock_format_setting"
+		android:title="@string/settings_detect_clock_format"
+		android:defaultValue="true"
+		/>
 	<ListPreference
 		android:key="theme_setting"
 		android:title="@string/settings_theme_option"
