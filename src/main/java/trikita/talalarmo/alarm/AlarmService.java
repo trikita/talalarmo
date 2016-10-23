@@ -127,6 +127,8 @@ public class AlarmService extends Service {
 
             if (App.getState().settings().ramping()) {
                 mHandler.postDelayed(mVolumeRunnable, VOLUME_INCREASE_DELAY);
+            } else {
+                mPlayer.setVolume(MAX_VOLUME, MAX_VOLUME);
             }
         } catch (Exception e) {
             if (mPlayer.isPlaying()) {
