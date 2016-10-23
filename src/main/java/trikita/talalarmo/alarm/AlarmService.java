@@ -113,9 +113,9 @@ public class AlarmService extends Service {
             }
             // Player setup is here
             String ringtone = App.getState().settings().ringtone();
-            if (ringtone.startsWith("content://media/external/audio/media/") &&
-                    Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
-                    checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
+                    && ringtone.startsWith("content://media/external/")
+                    && checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
                 ringtone = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM).toString();
             }
             mPlayer.setDataSource(this, Uri.parse(ringtone));
