@@ -14,6 +14,10 @@ import trikita.jedux.Store;
 @Gson.TypeAdapters
 public interface State {
 
+    Settings settings();
+
+    Alarm alarm();
+
     @Value.Immutable
     interface Settings {
         boolean vibrate();
@@ -50,10 +54,6 @@ public interface State {
             return c;
         }
     }
-
-    Settings settings();
-
-    Alarm alarm();
 
     class Default {
         public static State build() {
