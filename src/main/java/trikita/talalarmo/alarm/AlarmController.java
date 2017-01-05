@@ -2,7 +2,6 @@ package trikita.talalarmo.alarm;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -66,7 +65,7 @@ public class AlarmController implements Store.Middleware<Action, State> {
 
         AlarmManager am = (AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {		// KITKAT and later
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {        // KITKAT and later
                 am.set(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), sender);
             } else {
                 am.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), sender);
@@ -108,13 +107,6 @@ public class AlarmController implements Store.Middleware<Action, State> {
                         PowerManager.ON_AFTER_RELEASE, "AlarmReceiver");
         wl.acquire(5000);
         mContext.startService(new Intent(mContext, AlarmService.class));
-        // Start the activity where you can stop alarm
-        Intent i = new Intent(Intent.ACTION_MAIN);
-        i.setComponent(new ComponentName(mContext, AlarmActivity.class));
-        i.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP |
-                Intent.FLAG_ACTIVITY_NEW_TASK |
-                Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
-        mContext.startActivity(i);
     }
 
     private void dismissAlarm() {

@@ -3,24 +3,22 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.1.0'
+        classpath 'com.android.tools.build:gradle:2.2.2'
         classpath 'me.tatarka:gradle-retrolambda:3.2.5'
-        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.6'
     }
 }
 apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
-apply plugin: 'android-apt'
 
 android {
-    compileSdkVersion 'android-23'
-    buildToolsVersion '23.0.3'
+    compileSdkVersion 'android-25'
+    buildToolsVersion '25.0.0'
 
     defaultConfig {
         minSdkVersion 15
-        targetSdkVersion 23
-        versionCode 15
-        versionName '3.5'
+        targetSdkVersion 25
+        versionCode 19
+        versionName '3.9'
     }
 
     signingConfigs {
@@ -47,7 +45,7 @@ android {
 
 repositories {
     jcenter()
-    maven { url 'https://jitpack.io/'}
+    maven { url 'https://jitpack.io/' }
 }
 
 dependencies {
@@ -55,7 +53,7 @@ dependencies {
     compile 'com.github.trikita:promote:-SNAPSHOT'
     compile 'co.trikita:anvil-sdk15:0.3.1'
     compile 'org.immutables:gson:2.1.14'
-    apt 'org.immutables:value:2.1.14'
+    annotationProcessor 'org.immutables:value:2.1.14'
     provided 'org.immutables:value:2.1.14'
 }
 

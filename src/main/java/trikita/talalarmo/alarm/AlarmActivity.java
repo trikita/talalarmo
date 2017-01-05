@@ -16,6 +16,7 @@ import trikita.talalarmo.Actions;
 import trikita.talalarmo.App;
 import trikita.talalarmo.ui.Theme;
 
+
 public class AlarmActivity extends Activity {
     private PowerManager.WakeLock mWakeLock;
 
@@ -51,9 +52,15 @@ public class AlarmActivity extends Activity {
     }
 
     @Override
-    protected void onStop() {
+    protected void onUserLeaveHint() {
         stopAlarm();
-        super.onStop();
+        super.onUserLeaveHint();
+    }
+
+    @Override
+    public void onBackPressed() {
+        stopAlarm();
+        super.onBackPressed();
     }
 
     @Override

@@ -15,6 +15,14 @@ public class App extends Application {
 
     private Store<Action, State> store;
 
+    public static State dispatch(Action action) {
+        return instance.store.dispatch(action);
+    }
+
+    public static State getState() {
+        return instance.store.getState();
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -33,13 +41,5 @@ public class App extends Application {
                 new AlarmController(this));
 
         this.store.subscribe(Anvil::render);
-    }
-
-    public static State dispatch(Action action) {
-        return instance.store.dispatch(action);
-    }
-
-    public static State getState() {
-        return instance.store.getState();
     }
 }

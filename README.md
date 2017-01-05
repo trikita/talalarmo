@@ -1,5 +1,7 @@
 # Talalarmo
 
+[![Build Status](https://travis-ci.org/trikita/talalarmo.svg?branch=master)](https://travis-ci.org/trikita/talalarmo)
+
 <div>
 <img align="left" src="https://raw.githubusercontent.com/trikita/talalarmo/master/src/main/res/drawable-xxxhdpi/ic_launcher.png" alt="logo" width="96px" height="96px" />
 <p>

@@ -4,10 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
+import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
+
+import static trikita.anvil.DSL.*;
 
 import trikita.anvil.Anvil;
 import trikita.jedux.Action;
@@ -15,8 +18,6 @@ import trikita.talalarmo.Actions;
 import trikita.talalarmo.App;
 import trikita.talalarmo.MainActivity;
 import trikita.talalarmo.R;
-
-import static trikita.anvil.DSL.*;
 
 public class AlarmLayout {
     public static void view() {
@@ -78,10 +79,10 @@ public class AlarmLayout {
             // On tablets leave some margin around the clock view to avoid gigantic circles
             if ((Anvil.currentView().getResources().getConfiguration().screenLayout &
                     Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_LARGE) {
-                 margin(dip(48));
+                margin(dip(48));
             } else {
-                 margin(dip(8));
-             }
+                margin(dip(8));
+            }
             int w = Anvil.currentView().getWidth();
             int h = Anvil.currentView().getHeight();
             if (h == 0 || w == 0) {
@@ -126,10 +127,14 @@ public class AlarmLayout {
                 textView(() -> {
                     size(WRAP, WRAP);
                     int hours = App.getState().alarm().hours();
-                    if (hours == 0) {
-                        text("12");
+                    if (DateFormat.is24HourFormat(Anvil.currentView().getContext())) {
+                        text(String.format("%02d", hours + (App.getState().alarm().am() ? 0 : 12)));
                     } else {
-                        text(String.format("%02d", hours));
+                        if (hours == 0) {
+                            text("12");
+                        } else {
+                            text(String.format("%02d", hours));
+                        }
                     }
                     layoutGravity(CENTER);
                     typeface("fonts/Roboto-Light.ttf");
@@ -173,7 +178,7 @@ public class AlarmLayout {
             });
 
             v(AmPmSwitch.class, () -> {
-                size(amPmWidth, (int) (amPmWidth/1.5f));
+                size(amPmWidth, (int) (amPmWidth / 1.5f));
                 if (isPortrait()) {
                     x(w / 2 - hourCircleSize * 0.21f - amPmWidth * 3 / 4);
                     y(h / 2 + hourCircleSize * 0.05f - hourCircleSize / 2 - amPmWidth / 1.5f / 2);
@@ -241,7 +246,7 @@ public class AlarmLayout {
                 (h == 1) ? c.getString(R.string.hour) :
                         c.getString(R.string.hours, Long.toString(h));
 
-        int index = ((h > 0) ? 1 : 0) | ((m > 0)? 2 : 0);
+        int index = ((h > 0) ? 1 : 0) | ((m > 0) ? 2 : 0);
 
         String[] formats = c.getResources().getStringArray(R.array.alarm_set);
         return String.format(formats[index], hourSeq, minSeq);

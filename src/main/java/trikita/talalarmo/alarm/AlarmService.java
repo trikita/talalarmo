@@ -1,11 +1,16 @@
 package trikita.talalarmo.alarm;
 
+import android.Manifest;
 import android.app.Service;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
@@ -44,7 +49,7 @@ public class AlarmService extends Service {
         @Override
         public void run() {
             // increase volume level until reach max value
-            if (mVolumeLevel < MAX_VOLUME) {
+            if (mPlayer != null && mVolumeLevel < MAX_VOLUME) {
                 mVolumeLevel += VOLUME_INCREASE_STEP;
                 mPlayer.setVolume(mVolumeLevel, mVolumeLevel);
                 // set next increase in 600ms
@@ -70,7 +75,14 @@ public class AlarmService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        mHandler.post(this::startPlayer);
+        startPlayer();
+        // Start the activity where you can stop alarm
+        Intent i = new Intent(Intent.ACTION_MAIN);
+        i.setComponent(new ComponentName(this, AlarmActivity.class));
+        i.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP |
+                Intent.FLAG_ACTIVITY_NEW_TASK |
+                Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+        startActivity(i);
         return START_STICKY;
     }
 
@@ -83,6 +95,8 @@ public class AlarmService extends Service {
     public void onDestroy() {
         if (mPlayer.isPlaying()) {
             mPlayer.stop();
+            mPlayer.release();
+            mPlayer = null;
         }
         mHandler.removeCallbacksAndMessages(null);
     }
@@ -98,7 +112,13 @@ public class AlarmService extends Service {
                 mHandler.post(mVibrationRunnable);
             }
             // Player setup is here
-            mPlayer.setDataSource(this, Uri.parse(App.getState().settings().ringtone()));
+            String ringtone = App.getState().settings().ringtone();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
+                    && ringtone.startsWith("content://media/external/")
+                    && checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
+                ringtone = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM).toString();
+            }
+            mPlayer.setDataSource(this, Uri.parse(ringtone));
             mPlayer.setLooping(true);
             mPlayer.setAudioStreamType(AudioManager.STREAM_ALARM);
             mPlayer.setVolume(mVolumeLevel, mVolumeLevel);
@@ -107,6 +127,8 @@ public class AlarmService extends Service {
 
             if (App.getState().settings().ramping()) {
                 mHandler.postDelayed(mVolumeRunnable, VOLUME_INCREASE_DELAY);
+            } else {
+                mPlayer.setVolume(MAX_VOLUME, MAX_VOLUME);
             }
         } catch (Exception e) {
             if (mPlayer.isPlaying()) {
