@@ -24,9 +24,11 @@
     <string-array name="settings_themes">
         <item>Light</item>
         <item>Dark</item>
+        <item>AMOLED</item>
     </string-array>
     <string-array name="settings_themes_values" translatable="false">
         <item>0</item>
         <item>1</item>
+        <item>2</item>
     </string-array>
 </resources>

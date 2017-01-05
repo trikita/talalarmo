@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="AppTheme" parent="android:Theme.Material.NoActionBar" />
+
+    <style name="AMOLED" parent="android:Theme.Material" >
+        <item name="android:windowBackground">@android:color/background_dark</item>
+        <item name="android:colorBackground">@android:color/black</item>
+        <item name="android:textColorPrimary">@android:color/secondary_text_dark</item>
+        <item name="android:colorAccent">#c51162</item>
+    </style>
 </resources>

@@ -19,16 +19,32 @@ public class SettingsActivity extends Activity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            if (App.getState().settings().theme() == 0) {
-                setTheme(android.R.style.Theme_Holo_Light);
-            } else {
-                setTheme(android.R.style.Theme_Holo);
+            switch (App.getState().settings().theme()) {
+                case 0:
+                    setTheme(android.R.style.Theme_Holo_Light);
+                    break;
+                case 1:
+                    setTheme(android.R.style.Theme_Holo);
+                    break;
+                case 2:
+                    setTheme(R.style.AMOLED);
+                    break;
+                default:
+                    setTheme(android.R.style.Theme_Holo_Light);
             }
         } else {
-            if (App.getState().settings().theme() == 0) {
-                setTheme(android.R.style.Theme_Material_Light);
-            } else {
-                setTheme(android.R.style.Theme_Material);
+            switch (App.getState().settings().theme()) {
+                case 0:
+                    setTheme(android.R.style.Theme_Material_Light);
+                    break;
+                case 1:
+                    setTheme(android.R.style.Theme_Material);
+                    break;
+                case 2:
+                    setTheme(R.style.AMOLED);
+                    break;
+                default:
+                    setTheme(android.R.style.Theme_Holo_Light);
             }
         }
 

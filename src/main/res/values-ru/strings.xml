@@ -24,5 +24,6 @@
     <string-array name="settings_themes">
         <item>Светлая тема</item>
         <item>Темная тема</item>
+        <item>AMOLED</item>
     </string-array>
 </resources>
