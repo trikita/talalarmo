@@ -69,6 +69,7 @@ public class SettingsActivity extends Activity
                     e.printStackTrace();
                 }
                 App.dispatch(new Action<>(Actions.Settings.SET_THEME, themeIndex));
+                recreate();
                 break;
         }
     }
