@@ -29,7 +29,7 @@ public class AlarmController implements Store.Middleware<Action, State> {
     public void dispatch(Store<Action, State> store, Action action, Store.NextDispatcher<Action> next) {
         if (action.type == Actions.Alarm.ON) {
             Calendar c = Calendar.getInstance();
-            c.add(Calendar.MINUTE, 1);
+            c.add(Calendar.MINUTE, 20);
             store.dispatch(new Action<>(Actions.Alarm.SET_HOUR, c.get(Calendar.HOUR)));
             store.dispatch(new Action<>(Actions.Alarm.SET_MINUTE, c.get(Calendar.MINUTE)));
             store.dispatch(new Action<>(Actions.Alarm.SET_AM_PM, c.get(Calendar.AM_PM) == 0));
