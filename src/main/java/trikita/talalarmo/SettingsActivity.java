@@ -43,14 +43,17 @@ public class SettingsActivity extends Activity
     @Override
     public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
         switch (key) {
+            case "repeat_setting":
+                App.dispatch(new Action<>(Actions.Settings.SET_REPEAT, prefs.getBoolean(key, true)));
+                break;
+            case "snap_setting":
+                App.dispatch(new Action<>(Actions.Settings.SET_SNAP, prefs.getBoolean(key, true)));
+                break;
             case "vibration_setting":
                 App.dispatch(new Action<>(Actions.Settings.SET_VIBRATE, prefs.getBoolean(key, false)));
                 break;
             case "ramping_setting":
                 App.dispatch(new Action<>(Actions.Settings.SET_RAMPING, prefs.getBoolean(key, true)));
-                break;
-            case "snap_setting":
-                App.dispatch(new Action<>(Actions.Settings.SET_SNAP, prefs.getBoolean(key, true)));
                 break;
             case "ringtone_setting":
                 String s = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM).toString();

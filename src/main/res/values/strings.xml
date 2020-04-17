@@ -5,6 +5,7 @@
     <string name="settings">Settings</string>
     <string name="settings_ringtone_option">Ringtone</string>
     <string name="settings_snap_option">Snap to 5 min</string>
+    <string name="settings_repeat_option">Repeat Alarm Daily</string>
     <string name="settings_theme_option">Theme</string>
     <string name="settings_vibration_option">Vibrate</string>
     <string name="settings_volume_increase_option">Fade-in sound</string>

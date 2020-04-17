@@ -125,6 +125,8 @@ public class AlarmActivity extends Activity {
 
     private void stopAlarm() {
         App.dispatch(new Action<>(Actions.Alarm.DISMISS));
+        if(!App.getState().settings().repeat())
+            App.dispatch(new Action<>(Actions.Alarm.OFF));
         finish();
     }
 }

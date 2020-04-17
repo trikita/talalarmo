@@ -1,6 +1,7 @@
 package trikita.talalarmo;
 
 import android.app.Application;
+import android.util.Log;
 
 import trikita.anvil.Anvil;
 import trikita.jedux.Action;
@@ -29,7 +30,12 @@ public class App extends Application {
         App.instance = this;
 
         PersistanceController persistanceController = new PersistanceController(this);
-        State initialState = persistanceController.getSavedState();
+        State initialState = null;
+        try {
+            initialState = persistanceController.getSavedState();
+        } catch (Throwable ex) {
+            Log.w("Talalarmo", ex);
+        }
         if (initialState == null) {
             initialState = State.Default.build();
         }

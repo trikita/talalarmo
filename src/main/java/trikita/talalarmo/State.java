@@ -26,6 +26,8 @@ public interface State {
 
         boolean ramping();
 
+        boolean repeat();
+
         String ringtone();
 
         int theme();
@@ -69,6 +71,7 @@ public interface State {
                             .ramping(true)
                             .snap(true)
                             .vibrate(true)
+                            .repeat(false)
                             .theme(0)
                             .build())
                     .build();
@@ -87,6 +90,8 @@ public interface State {
             if (action.type instanceof Actions.Settings) {
                 Actions.Settings type = (Actions.Settings) action.type;
                 switch (type) {
+                    case SET_REPEAT:
+                        return ImmutableSettings.copyOf(settings).withRepeat((Boolean) action.value);
                     case SET_RAMPING:
                         return ImmutableSettings.copyOf(settings).withRamping((Boolean) action.value);
                     case SET_VIBRATE:

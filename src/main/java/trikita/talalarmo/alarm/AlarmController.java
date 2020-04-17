@@ -14,6 +14,7 @@ import java.util.Calendar;
 import trikita.jedux.Action;
 import trikita.jedux.Store;
 import trikita.talalarmo.Actions;
+import trikita.talalarmo.App;
 import trikita.talalarmo.MainActivity;
 import trikita.talalarmo.State;
 
@@ -49,7 +50,8 @@ public class AlarmController implements Store.Middleware<Action, State> {
                     break;
                 case DISMISS:
                     dismissAlarm();
-                    restartAlarm(store.getState());
+                    if(App.getState().settings().repeat())
+                        restartAlarm(store.getState());
                     break;
                 case OFF:
                     cancelAlarm();
