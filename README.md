@@ -12,7 +12,7 @@ Crafted by a team with over 25 years of sleeping experience - it just has to be 
 <br/>
 <br/>
 <br/>
-It does only one function but does it well. Only one alarm time is supported and it's recurring daily. Setting the new alarm time takes less than a second. To dismiss the alarm you can touch the screen anywhere which is handy if you are still sleepy and have barely opened your eyes. There is no snooze mode because you should be honest to yourself: if it's time to wake up - go ahead!
+It does only one function but does it well. Only one alarm time is supported and it can be set to recur daily. Setting the new alarm time takes less than a second. To dismiss the alarm you can touch the screen anywhere which is handy if you are still sleepy and have barely opened your eyes. There is no snooze mode because you should be honest to yourself: if it's time to wake up - go ahead!
 </p>
 </div>
 
