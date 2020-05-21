@@ -8,6 +8,10 @@
 		android:defaultValue="true"
 		android:key="snap_setting"
 		android:title="@string/settings_snap_option" />
+	<EditTextPreference
+		android:defaultValue="30"
+		android:key="offset_setting"
+		android:title="@string/settings_offset_option" />/>
 
 	<CheckBoxPreference
 		android:defaultValue="true"

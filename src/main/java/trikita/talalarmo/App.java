@@ -34,7 +34,8 @@ public class App extends Application {
         try {
             initialState = persistanceController.getSavedState();
         } catch (Throwable ex) {
-            Log.w("Talalarmo", ex);
+            if(!(ex.getCause() instanceof IllegalStateException))
+                Log.w("Talalarmo", ex);
         }
         if (initialState == null) {
             initialState = State.Default.build();

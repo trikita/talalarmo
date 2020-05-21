@@ -24,6 +24,8 @@ public interface State {
 
         boolean snap();
 
+        int offset();
+
         boolean ramping();
 
         boolean repeat();
@@ -72,6 +74,7 @@ public interface State {
                             .snap(true)
                             .vibrate(true)
                             .repeat(false)
+                            .offset(30)
                             .theme(0)
                             .build())
                     .build();
@@ -94,6 +97,8 @@ public interface State {
                         return ImmutableSettings.copyOf(settings).withRepeat((Boolean) action.value);
                     case SET_RAMPING:
                         return ImmutableSettings.copyOf(settings).withRamping((Boolean) action.value);
+                    case SET_OFFSET:
+                        return ImmutableSettings.copyOf(settings).withOffset((Integer) action.value);
                     case SET_VIBRATE:
                         return ImmutableSettings.copyOf(settings).withVibrate((Boolean) action.value);
                     case SET_SNAP:
