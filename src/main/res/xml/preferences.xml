@@ -1,32 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 	<CheckBoxPreference
-		android:key="vibration_setting"
-		android:title="@string/settings_vibration_option"
-		android:defaultValue="true"
-		/>
-	<RingtonePreference
-		android:key="ringtone_setting"
-		android:title="@string/settings_ringtone_option"
-		android:showSilent="true"
-		android:showDefault="true"
-		android:ringtoneType="ringtone|alarm"
-		/>
+		android:defaultValue="false"
+		android:key="repeat_setting"
+		android:title="@string/settings_repeat_option" />
 	<CheckBoxPreference
-		android:key="snap_setting"
-		android:title="@string/settings_snap_option"
 		android:defaultValue="true"
-		/>
+		android:key="snap_setting"
+		android:title="@string/settings_snap_option" />
+	<EditTextPreference
+		android:defaultValue="30"
+		android:key="offset_setting"
+		android:title="@string/settings_offset_option" />/>
+
+	<CheckBoxPreference
+		android:defaultValue="true"
+		android:key="vibration_setting"
+		android:title="@string/settings_vibration_option" />
 	<CheckBoxPreference
 		android:key="ramping_setting"
 		android:title="@string/settings_volume_increase_option"
-		android:defaultValue="true"
-		/>
+		android:defaultValue="true" />
+	<RingtonePreference
+		android:key="ringtone_setting"
+		android:ringtoneType="ringtone|alarm"
+		android:showDefault="true"
+		android:showSilent="true"
+		android:title="@string/settings_ringtone_option" />
 	<ListPreference
 		android:key="theme_setting"
 		android:title="@string/settings_theme_option"
 		android:defaultValue="0"
 		android:entries="@array/settings_themes"
-		android:entryValues="@array/settings_themes_values"
-		/>
+		android:entryValues="@array/settings_themes_values" />
 </PreferenceScreen>

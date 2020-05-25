@@ -14,6 +14,7 @@ import java.util.Calendar;
 import trikita.jedux.Action;
 import trikita.jedux.Store;
 import trikita.talalarmo.Actions;
+import trikita.talalarmo.App;
 import trikita.talalarmo.MainActivity;
 import trikita.talalarmo.State;
 
@@ -29,7 +30,7 @@ public class AlarmController implements Store.Middleware<Action, State> {
     public void dispatch(Store<Action, State> store, Action action, Store.NextDispatcher<Action> next) {
         if (action.type == Actions.Alarm.ON) {
             Calendar c = Calendar.getInstance();
-            c.add(Calendar.MINUTE, 1);
+            c.add(Calendar.MINUTE, App.getState().settings().offset());
             store.dispatch(new Action<>(Actions.Alarm.SET_HOUR, c.get(Calendar.HOUR)));
             store.dispatch(new Action<>(Actions.Alarm.SET_MINUTE, c.get(Calendar.MINUTE)));
             store.dispatch(new Action<>(Actions.Alarm.SET_AM_PM, c.get(Calendar.AM_PM) == 0));
@@ -49,7 +50,8 @@ public class AlarmController implements Store.Middleware<Action, State> {
                     break;
                 case DISMISS:
                     dismissAlarm();
-                    restartAlarm(store.getState());
+                    if(App.getState().settings().repeat())
+                        restartAlarm(store.getState());
                     break;
                 case OFF:
                     cancelAlarm();

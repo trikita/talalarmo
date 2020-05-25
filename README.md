@@ -12,7 +12,9 @@ Crafted by a team with over 25 years of sleeping experience - it just has to be 
 <br/>
 <br/>
 <br/>
-It does only one function but does it well. Only one alarm time is supported and it's recurring daily. Setting the new alarm time takes less than a second. To dismiss the alarm you can touch the screen anywhere which is handy if you are still sleepy and have barely opened your eyes. There is no snooze mode because you should be honest to yourself: if it's time to wake up - go ahead!
+It does only one function but does it well. Only one alarm time is supported and it can be set to recur daily. 
+Setting the new alarm time takes less than a second. To dismiss the alarm simply hold down anywhere on the screen. 
+There is no snooze mode because you should be honest to yourself: if it's time to wake up - go ahead!
 </p>
 </div>
 
@@ -23,10 +25,10 @@ It does only one function but does it well. Only one alarm time is supported and
 
 ## Features
 
-* Clean, minimal and easy-to-use design with modern material UI.
-* Set alarm with only two taps - the easiest way to set alarm time.
-* Only one alarm time is supported and it's recurring daily. You will never miss it or be disturbed by a wrong alarm.
-* Choose alarm music, optionally turn on the vibration
+* Clean, minimal and easy-to-use design with modern material UI
+* Set alarm with only two taps - the easiest way to set alarm time
+* Only one alarm time is supported and can be set to recur daily - you will never miss it or be disturbed by a wrong alarm
+* Ability to choose alarm music and enable vibration
 * Wake up easily with gentle alarm (gradually increasing alarm volume)
 * Dark and light themes
 
@@ -44,4 +46,3 @@ It does only one function but does it well. Only one alarm time is supported and
 ## License
 
 Code is distributed under MIT license, feel free to use it. Just please, don't upload Talalarmo clones to Google Play (they are likely to be rejected anyway).
-
